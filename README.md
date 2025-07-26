@@ -5,8 +5,8 @@
 
 ## Github and Drive Link
 Project resources can be found here:  
-[Google Drive Folder](https://drive.google.com/drive/folders/1wJjnAU_e5YdjZZjYG1rB2OabZ_NYvkjF?usp=sharing)
-[Github Organization](https://github.com/Bogazici-Racing)
+-[Google Drive Folder](https://drive.google.com/drive/folders/1wJjnAU_e5YdjZZjYG1rB2OabZ_NYvkjF?usp=sharing)
+-[Github Organization](https://github.com/Bogazici-Racing)
 
 ---
 
