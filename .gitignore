@@ -1,0 +1,29 @@
+# VS Code
+.vscode/
+
+# JetBrains IDE'leri (IntelliJ, CLion, PyCharm vs.)
+.idea/
+
+# Python cache / temporary files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Project files
+.project
+.DS_Store
+
+# Build output (CMake, Makefile vs.)
+build/
+*.o
+*.so
+*.exe
+*.out
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
