@@ -17,7 +17,7 @@ static SensorOutput sensor_output;
 // MANDATORY AND IMPORTANT SENSORS
 // ===========================================================
 
-// Throttle Position Sensor
+// Throttle Position Sensor(Hall sensor)
 uint16_t read_TPS(void){
     uint16_t adc_value = 0;
     return adc_value;
