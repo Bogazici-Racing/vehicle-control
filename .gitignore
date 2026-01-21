@@ -1,3 +1,31 @@
+# --- OS Files (İşletim Sistemi Çöpleri) ---
+.DS_Store
+Thumbs.db
+
+# --- Build Files (Derleme Çıktıları - Bunları yükleme!) ---
 *.o
-*.exe
+*.obj
+*.hex
+*.bin
+*.elf
+*.map
+*.list
+*.d
+
+# --- Build Folders (STM32CubeIDE Derleme Klasörleri) ---
+Debug/
+Release/
+build/
+
+# --- IDE Files (VS Code ve Eclipse/STM32 Ayarları) ---
 .vscode/
+.idea/
+*.launch
+.settings/
+.project
+.cproject
+.mxproject
+
+# --- Temporary Files ---
+*.bak
+*.tmp
