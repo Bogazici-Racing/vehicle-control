@@ -1,3 +1,30 @@
+# Formula Student ECU Project
+
+Custom Engine Control Unit software for Honda CBR 600 RR engine, designed for STM32F4 series.
+
+## Development Changelog
+
+### Phase 1: Architecture & Drivers
+- **Commit 1:** Initial Setup. Configured ADC1 with DMA and GPIOs via CubeMX.
+- **Commit 2:** Created Modular Directory Structure (drivers, modules, config).
+- **Commit 3:** Implemented ADC and GPIO Drivers.
+- **Commit 4:** Implemented Sensor Processing Logic (Raw to Physical units).
+
+### Phase 2: Core Logic
+- **Commit 5:** Added Time-Based Task Scheduler.
+- **Commit 6:** Implemented Crank Decoder & Interrupt Logic (RPM Calculation).
+- **Commit 7:** Implemented Ignition Control System.
+- **Commit 8:** Implemented Fuel Injection System (Angle-based).
+
+### Phase 3: Configuration & Optimization
+- **Commit 9:** Refactored Config: Centralized all tuning params in `ecu_config.h`.
+- **Commit 10:** Optimized sensor reads and cleaned up redundant code.
+- **Commit 11:** Added PC-Based Unit Testing (`test_simulation.c`).
+
+
+
+
+
 # BURACİNG
 
 
