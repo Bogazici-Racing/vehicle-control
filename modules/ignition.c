@@ -1,62 +1,28 @@
 #include "ignition.h"
+#include "gpio_driver.h"
+#include "ecu_config.h"
+#include <math.h> // For fabs()
 
 // ===========================================================
-// Static data
+// Static Data
 // ===========================================================
+
 static IgnitionData ignition_output;
-static uint16_t crank_angle_raw = 0;
-static uint16_t rpm_raw = 0;
+// Default target from Config
+static float target_firing_angle = CONF_IGNITION_BASE_ANGLE; 
 
 // ===========================================================
-// Read functions
+// Update Logic (Slow Loop)
 // ===========================================================
-uint16_t read_CrankAngle(void) {
-    // ToDo: replace with real ADC read
-    crank_angle_raw = 0;  // placeholder
-    return crank_angle_raw;
+
+void update_ignition(void) {
+    // Placeholder: Keep using Base Angle defined in Config
+    // In future: Read Map -> Update target_firing_angle
+    
+    ignition_output.ignition_angle = target_firing_angle;
+    ignition_output.dwell_time = CONF_COIL_DWELL_MS;
 }
 
-uint16_t read_RPM(void) {
-    // ToDo: replace with RPM sensor read
-    rpm_raw = 0;  // placeholder
-    return rpm_raw;
-}
-
-// ===========================================================
-// Convert functions
-// ===========================================================
-float convert_CrankAngle(uint16_t raw_value) {
-    // Scale raw value to degrees
-    float angle = (float)raw_value * 0.1f; // ToDo: adjust scale
-    return angle;
-}
-
-float convert_RPM(uint16_t raw_value) {
-    // Scale raw value to RPM
-    float rpm = (float)raw_value * 1.0f; // ToDo: adjust scale
-    return rpm;
-}
-
-// ===========================================================
-// Process functions
-// ===========================================================
-float process_IgnitionAngle(float angle) {
-    // Placeholder: no real calculation yet
-    float processed_angle = angle; // ToDo: implement actual ignition logic
-    ignition_output.ignition_angle = processed_angle;
-    return processed_angle;
-}
-
-float process_DwellTime(float dwell) {
-    // Placeholder: no real calculation yet
-    float processed_dwell = dwell; // ToDo: implement coil control logic
-    ignition_output.dwell_time = processed_dwell;
-    return processed_dwell;
-}
-
-// ===========================================================
-// Get output functions
-// ===========================================================
 float get_output_IgnitionAngle(void) {
     return ignition_output.ignition_angle;
 }
@@ -66,18 +32,22 @@ float get_output_DwellTime(void) {
 }
 
 // ===========================================================
-// Update ignition outputs
+// Trigger Logic (Fast Interrupt Loop)
 // ===========================================================
-void update_ignition(void) {
-    // Read raw sensor values
-    uint16_t crank = read_CrankAngle();
-    uint16_t rpm = read_RPM();
 
-    // Convert to meaningful units
-    float angle = convert_CrankAngle(crank);
-    float revs = convert_RPM(rpm);
+void check_ignition_timing(float current_angle) {
+    
+    float tolerance = 2.0f; // Degree window
 
-    // Process ignition logic
-    process_IgnitionAngle(angle);
-    process_DwellTime(revs);
+    // --- CYLINDER 1 ---
+    // Target is Base Angle (e.g., 10 deg) relative to TDC
+    // Note: This logic assumes simple single-cylinder like behavior for test.
+    // Real implementation needs individual targets for Cyl 2, 3, 4 based on offsets.
+    
+    if (fabs(current_angle - target_firing_angle) < tolerance) {
+        set_coil(1, 0); // FIRE! (Spark on Falling Edge)
+    }
+    
+    // For now, only Cyl 1 is active in this simplified logic.
+    // To enable others, check against (CONF_CYL2_ANGLE - target) etc.
 }
